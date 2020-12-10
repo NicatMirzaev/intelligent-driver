@@ -17,6 +17,6 @@ class Button:
         screen.blit(self.text, (self.x + 30, self.y))
 
     def isClicked(self, x, y):
-        if self.x <= x <= x + self.width and self.y <= y <= self.y + self.height:
+        if x >= self.x and x <= self.x + self.width and y >= self.y and y <= self.y + self.height:
             return True
         return False
