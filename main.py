@@ -25,7 +25,7 @@ GAME_MODE = GAME_MODE_MENU
 board = []
 car = None
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption("Intelligent Driver (Coded By Nicat)")
+pygame.display.set_caption("Intelligent Driver (Coded By Zoxy)")
 
 # Game Loop
 run = True
@@ -61,13 +61,17 @@ while run:
                             print(e)
 
                     elif button.type == 5:
-                        with open("data.json", "r") as f:
-                            board = json.load(f)
+                        try:
+                            with open("data.json", "r") as f:
+                                board = json.load(f)
+                        except Exception as e:
+                            print(e)
+                            board = []
 
                         if len(board) <= 0:
                             print("You must draw something.")
                         else:
-                            car = Car(board_x + 10, board_y + 10, 0)
+                            car = Car(board_x + 20, board_y + 20, 0)
                             GAME_MODE = GAME_MODE_STARTED
                             
 
@@ -109,6 +113,7 @@ while run:
             for i in board:
                 pygame.draw.rect(screen, (0, 0, 0), (i[0], i[1], 25, 25), 0)
 
+            car.update(board)
             car.draw(screen)
 
 
